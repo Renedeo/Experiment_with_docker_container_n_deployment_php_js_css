@@ -1,0 +1,46 @@
+@import url("variable/root.css");
+
+#blob {
+  z-index: 0;
+  position: absolute;
+  width: var(--blob-width);
+  height: var(--blob-height);
+  background: var(--blob-background-color);
+  -webkit-animation: move var(--blob-webkit-animation-duration) infinite
+    alternate;
+  mix-blend-mode: color-dodge;
+  animation: move var(--blob-animation-move-duration) infinite alternate;
+  transition: 1s var(--blob-animation-move-timing-function);
+}
+
+#blob:hover {
+  width: var(--blob-hover-width);
+  height: var(--blob-hover-height);
+  -webkit-filter: blur(30px);
+  filter: blur(30px);
+  box-shadow: var(--blob-hover-boxshadow);
+}
+
+@-webkit-keyframes move {
+  from {
+    transform: var(--blob-init-coordinates) rotate(-90deg);
+    border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%;
+  }
+
+  to {
+    transform: var(--blob-last-coordinates) rotate(-10deg);
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: var(--blob-init-coordinates) rotate(-90deg);
+    border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%;
+  }
+
+  to {
+    transform: var(--blob-last-coordinates) rotate(-10deg);
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+  }
+}

@@ -1,0 +1,19 @@
+@import url("../variable/root.css");
+
+#menu {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+}
+
+#menu form {
+    flex-grow: 1;
+}
+
+#menu #menu-option ul li i{
+    background-color: var(--button-color);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}

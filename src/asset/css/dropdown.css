@@ -1,0 +1,46 @@
+:root{
+    --delay:.3s;
+    --duration:.3s;
+}
+
+#password-area{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#password-area > #password-recommendation {
+    /* margin-left: 10px; */
+    position: relative;
+}
+
+.fas {
+    margin: 5px;
+}
+
+label[for="information-checkbox"]{
+    position: inherit;
+}
+
+input[type="checkbox"]{
+    position: absolute;
+    display: none !important;
+}
+
+#password-recommendation{
+
+    height: 100px;
+    opacity: 1;
+    font-size: xx-small;
+    transition: height var(--duration) ease-in,
+                opacity var(--delay) var(--duration) ease-in;
+    
+}
+
+div#password-area:has(> div > input:checked) + #password-recommendation{
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height var(--delay) var(--duration) ease-in,
+                opacity var(--duration) ease-in;
+} 
