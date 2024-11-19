@@ -1,0 +1,49 @@
+name: CI Pipeline for Messaging App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: instant_comm
+          MYSQL_USER: user
+          MYSQL_PASSWORD: userpassword
+        ports:
+          - 3306:3306
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker Compose Services
+      run: docker-compose -f docker-compose.yaml up -d --build
+
+    - name: Wait for MySQL to be Ready
+      run: |
+        until docker exec mysql mysqladmin ping -h "127.0.0.1" --silent; do
+          echo "Waiting for database connection..."
+          sleep 5
+        done
+
+    - name: Run PHP Unit Tests
+      run: |
+        docker exec php ./vendor/bin/phpunit
+
+    - name: Tear Down Services
+      if: always()
+      run: docker-compose -f docker-compose.yaml down
