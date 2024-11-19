@@ -1,0 +1,98 @@
+#message-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 500px;
+
+  height: 75%;
+  min-height: 150px;
+}
+
+#messages-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: scroll;
+
+  height: 75%;
+  min-height: 75px;
+
+  padding: 0 20px 0 0;
+  margin: 5px;
+}
+
+.message-div {
+  width: 100%;
+  position: relative;
+  padding: 10px 0;
+}
+.current-user {
+  display: flex;
+  flex-direction: column;
+  /* background-color: bisque; */
+  align-items: end;
+}
+
+.current-user .message-content {
+  text-align: right;
+}
+.current-user .message-information {
+  flex-direction: row-reverse;
+}
+.current-user .message-content {
+  text-align: right;
+}
+
+.message-information {
+  display: flex;
+  font-size: xx-small;
+  align-items: end;
+}
+
+.message-information .message-userName {
+  background-color: rgba(199, 4, 150, 0.154);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.message-information .message-date {
+  position: absolute;
+  bottom: 0;
+}
+
+.other-user .message-information .message-date {
+  left: 0;
+}
+.current-user .message-information .message-date {
+  right: 0;
+}
+
+.message-content {
+  width: fit-content;
+  margin: 0;
+}
+
+#message-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+#message-footer > div > textarea {
+  flex-grow: 1;
+  /* width: fit-content; */
+  /* height: 100%; */
+  padding: 10px;
+  border-radius: 50%;
+}
+
+input[type="button"] {
+  width: fit-content;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+}

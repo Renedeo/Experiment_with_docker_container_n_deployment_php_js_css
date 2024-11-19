@@ -1,0 +1,22 @@
+input {
+    text-align: right;
+}
+
+/* label {
+    position: inherit;
+} */
+
+input::before {
+    content: "test";
+    color: #ccc;
+    font-size: x-small;
+    /* position: absolute; */
+    /* top: var(--label-position-after-placeholder-diseapear-top);
+    left: var(--label-position-after-placeholder-diseapear-left) ; */
+    background-color: var(--label-background-color);
+    transition: all var(--label-trasition-duration) ease-in-out;
+}
+
+input::placeholder {
+    color: aqua;
+}
