@@ -49,6 +49,20 @@ jobs:
       run: |
         docker exec php ./vendor/bin/phpunit
 
+    # - name: Generate Static Files
+      # run: |
+      #   # Replace this with the command that generates your website's static files
+      #   docker exec php php generate_static_site.php
+      #   mkdir -p build
+      #   cp -r ./* ./build/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+
+
     - name: Tear Down Docker Compose
       uses: sudo-bot/action-docker-compose@latest
       with:
