@@ -49,6 +49,7 @@ jobs:
       run: |
         docker exec php ./vendor/bin/phpunit
 
-    - name: Tear Down Services
-      if: always()
-      run: docker-compose -f docker-compose.yaml down
+    - name: Tear Down Docker Compose
+      uses: sudo-bot/action-docker-compose@latest
+      with:
+        cli-args: "down"
