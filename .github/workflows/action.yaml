@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     services:
@@ -35,38 +35,25 @@ jobs:
       with:
         cli-args: "up -d --build"
 
-    # - name: Build Docker Compose Services
-    #   run: docker-compose -f docker-compose.yaml up -d --build
-
     - name: Wait for MySQL to be Ready
       run: |
         until docker exec mysql mysqladmin ping -h "127.0.0.1" --silent; do
           echo "Waiting for database connection..."
           sleep 5
         done
-    
-    # - name: Install PHPUnit
-    #   run: |
-    #       docker exec php composer require --dev phpunit/phpunit:^10
-    #       docker exec php ./vendor/bin/phpunit --version
 
-    # - name: Run PHP Unit Tests
-    #   run: |
-    #     docker exec php ./vendor/bin/phpunit
+    - name: Log in to Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        echo $HEROKU_API_KEY | heroku auth:token
 
-    # - name: Generate Static Files
-      # run: |
-      #   # Replace this with the command that generates your website's static files
-      #   docker exec php php generate_static_site.php
-      #   mkdir -p build
-      #   cp -r ./* ./build/
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
-
+    - name: Deploy to Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku git:remote -a test_app
+        git push heroku main
 
     - name: Tear Down Docker Compose
       uses: sudo-bot/action-docker-compose@latest
