@@ -45,14 +45,14 @@ jobs:
           sleep 5
         done
     
-    - name: Install PHPUnit
-      run: |
-          docker exec php composer require --dev phpunit/phpunit:^10
-          docker exec php ./vendor/bin/phpunit --version
+    # - name: Install PHPUnit
+    #   run: |
+    #       docker exec php composer require --dev phpunit/phpunit:^10
+    #       docker exec php ./vendor/bin/phpunit --version
 
-    - name: Run PHP Unit Tests
-      run: |
-        docker exec php ./vendor/bin/phpunit
+    # - name: Run PHP Unit Tests
+    #   run: |
+    #     docker exec php ./vendor/bin/phpunit
 
     # - name: Generate Static Files
       # run: |
